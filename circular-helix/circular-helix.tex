@@ -1,0 +1,59 @@
+\documentclass{standalone}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\tikzset{arrmark-fwd/.style={
+        postaction={
+            decorate,decoration={
+                markings,
+                mark=at position #1/11+0.1/11 with {\arrow[black, line width=0.35mm]{>};}
+            }
+        }
+    }
+}
+
+\tikzset{arrmark-back/.style={
+        postaction={
+            decorate,decoration={
+                markings,
+                mark=at position #1/11-0.1/11 with {\arrow[black, line width=0.35mm]{<};}
+            }
+        }
+    }
+}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+    % circular helix
+    % r = < cos(t), sin(t), t>, t in [0, 5pi]
+    \begin{axis}[
+        scale = 1,
+        axis lines=middle,
+        xmin=-1.5,  xmax=1.75,
+        ymin=-1.5,  ymax=1.75,
+        zmin=0, zmax=25,
+        xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+        ztick=\empty,
+        view={120}{30}
+    ]
+        \node at (0, 0, 0) [below] {O};
+
+        % helix
+        \addplot3 [
+            domain=0:5*pi, samples=250, samples y=0, variable=\t,
+            black,
+            arrmark-fwd/.list={pi/4, 4.5*pi/4, 6.5*pi/4, 10*pi/4, 12*pi/4}
+        ]
+        ({cos(deg(t))}, {sin(deg(t))}, {t});
+
+        % start point
+        \addplot3 [only marks] coordinates {(1, 0, 0) (-1, 0, 5*pi)};
+    \end{axis}
+\end{tikzpicture}
+
+\end{document}
