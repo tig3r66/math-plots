@@ -1,50 +1,15 @@
+% !TEX program = xelatex
 \documentclass{standalone}
 
-\usepackage{pgfplots}
-\pgfplotsset{compat=newest}
+\usepackage{pst-3dplot}
 
-\usepackage{tikz}
-\usetikzlibrary{decorations.markings}
-\tikzset{arrmark-fwd/.style={
-        postaction={
-            decorate,decoration={
-                markings,
-                mark=at position #1/11+0.1/11 with {\arrow[black, line width=0.35mm]{>};}
-            }
-        }
-    }
-}
-
-\tikzset{arrmark-back/.style={
-        postaction={
-            decorate,decoration={
-                markings,
-                mark=at position #1/11-0.1/11 with {\arrow[black, line width=0.35mm]{<};}
-            }
-        }
-    }
-}
-
+\def\cardioid{2*(1-sin(x))}
 
 \begin{document}
 
-\begin{tikzpicture}
-    \begin{axis}[
-        scale = 1,
-        axis lines=middle,
-        xmin=-5,  xmax=5,
-        ymin=-5,  ymax=5,
-        zmin=0, zmax=5,
-        xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
-        ztick=\empty,
-        view={120}{30}
-    ]
-        % origin
-        \node at (0, 0, 0) [below] {O};
-
-        % ADD STUFF HERE
-        \addplot3 [only marks] coordinates {(1, 0, 0) (-1, 0, 5*pi)};
-    \end{axis}
-\end{tikzpicture}
+\begin{pspicture}[algebraic,plotpoints=100,polarplot](-5,-5)(5,5)
+    \psaxes[axesstyle=polar](4,0)
+    \psplot[linecolor=red,linewidth=1pt]{Pi neg}{Pi}{\cardioid}
+\end{pspicture}
 
 \end{document}

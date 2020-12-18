@@ -4,7 +4,7 @@ DIRECTORIES=Figures
 
 
 make:
-	@pdflatex -pdf $(PAPER)
+	@xelatex -synctex=1 -interaction=nonstopmode $(PAPER)
 	@echo Successful pdflatex compile.
 
 clean:
