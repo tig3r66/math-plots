@@ -1,51 +1,72 @@
 % !TEX program = xelatex
 \documentclass{article}
-\usepackage{pst-solides3d}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{tikz}
 
 
 \begin{document}
 
+% elliptic paraboloid
+\begin{tikzpicture}
+    \begin{axis}[
+        axis on top,
+        axis lines=center,
+        set layers=default,
+        xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+        xtick=\empty, ytick=\empty, ztick=\empty,
+        colormap/viridis,
+        opacity=0.65,
+        view={135}{30}
+    ]
 
-\begin{pspicture}[viewpoint=50 30 20 rtp2xyz] (-2, -2)(2, 2)
-    \psSolid[object=point, args=1 1 0]
-    \psSolid[object=line, args=0 -1 0 1 2 2]
-    \psSolid[object=vecteur, args=-1 -2 1]
-    % 3d axis
-    \axesIIID[labelsep=10pt](0, 0, 0)(3, 3, 3)
-\end{pspicture}
+    \addplot3 [surf, draw=none,restrict z to domain=0:5,
+               data cs=polar, domain=0:360, y domain=0:3] (x, y, y^2);
+    \end{axis}
+\end{tikzpicture}
 
-% range of plane: [base =-x x -y y]
-% equation of plane: args=[0 0 1 0]
-\begin{pspicture}[viewpoint=50 30 20 rtp2xyz] (-2, -2)(2, 2)
-    \psSolid[object=plan, definition=equation, args={[0 0 1 0]}, base=-1 1 -1.5 1.5]
-    % 3d axis
-    \axesIIID[labelsep=10pt](0, 0, 0)(3, 3, 3)
-\end{pspicture}
+\vspace{2em}
 
-% cube
-% edge length: [a=4]
-\begin{pspicture}[viewpoint=50 30 20 rtp2xyz] (-2, -2)(2, 2)
-    \psSolid[object=cube, a=1, action=draw*, fillcolor=blue!20] (2, 3, 2)
-    % 3d axis
-    \axesIIID[labelsep=10pt](0, 0, 0)(3, 3, 3)
-\end{pspicture}
+% cone
+\begin{tikzpicture}
+    \begin{axis}[
+        axis on top,
+        axis lines=center,
+        set layers=default,
+        xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+        xtick=\empty, ytick=\empty, ztick=\empty,
+        domain=0:1, y domain=0:2*pi,
+        colormap/viridis,
+        opacity=0.75,
+        view={135}{30}
+    ]
 
-% cylinder
-% height and radius: [h=6, r=2]
-% grid: [ngrid= n1 n2]
-\begin{pspicture}[viewpoint=50 30 20 rtp2xyz] (-2, -2)(2, 2)
-    \psSolid[object=cylindre, h=3, r=1, fillcolor=white, ngrid=4 22] (0, 0 -3)
-    % 3d axis
-    \axesIIID[labelsep=10pt](0, 0, 0)(3, 3, 3)
-\end{pspicture}
+    \addplot3 [surf] ({x*cos(deg(y))}, {x*sin(deg(y))}, {x});
+    \addplot3 [surf] ({x*cos(deg(y))}, {x*sin(deg(y))}, {-x});
+    \end{axis}
+\end{tikzpicture}
 
-% curve
-\begin{pspicture}[viewpoint=50 30 20 rtp2xyz] (-2, -2)(2, 2)
-    \defFunction[algebraic]{helice}(t){cos(t)}{sin(t)}{t}
-    \psSolid[object=courbe, function=helice, resolution=360]
-    % 3d axis
-    \axesIIID[labelsep=10pt](0, 0, 0)(3, 3, 3)
-\end{pspicture}
+\vspace{2em}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        axis on top,
+        axis lines=center,
+        set layers=default,
+        xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+        xtick=\empty, ytick=\empty, ztick=\empty,
+        domain=0:1, y domain=0:2*pi,
+        colormap/viridis,
+        opacity=0.75,
+        xmin=-2, xmax=2, ymin=-2, ymax=2,
+        view={135}{30}
+    ]
+
+    \addplot3 [surf,domain=0:360,y domain=-1:1]
+              ({cosh(y)*cos(x)}, {cosh(y)*sin(x)}, {sinh(y)});
+    \end{axis}
+\end{tikzpicture}
 
 
 \end{document}
