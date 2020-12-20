@@ -1,0 +1,51 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage{pst-solides3d}
+
+
+\begin{document}
+
+
+\begin{pspicture}[viewpoint=50 30 20 rtp2xyz] (-2, -2)(2, 2)
+    \psSolid[object=point, args=1 1 0]
+    \psSolid[object=line, args=0 -1 0 1 2 2]
+    \psSolid[object=vecteur, args=-1 -2 1]
+    % 3d axis
+    \axesIIID[labelsep=10pt](0, 0, 0)(3, 3, 3)
+\end{pspicture}
+
+% range of plane: [base =-x x -y y]
+% equation of plane: args=[0 0 1 0]
+\begin{pspicture}[viewpoint=50 30 20 rtp2xyz] (-2, -2)(2, 2)
+    \psSolid[object=plan, definition=equation, args={[0 0 1 0]}, base=-1 1 -1.5 1.5]
+    % 3d axis
+    \axesIIID[labelsep=10pt](0, 0, 0)(3, 3, 3)
+\end{pspicture}
+
+% cube
+% edge length: [a=4]
+\begin{pspicture}[viewpoint=50 30 20 rtp2xyz] (-2, -2)(2, 2)
+    \psSolid[object=cube, a=1, action=draw*, fillcolor=blue!20] (2, 3, 2)
+    % 3d axis
+    \axesIIID[labelsep=10pt](0, 0, 0)(3, 3, 3)
+\end{pspicture}
+
+% cylinder
+% height and radius: [h=6, r=2]
+% grid: [ngrid= n1 n2]
+\begin{pspicture}[viewpoint=50 30 20 rtp2xyz] (-2, -2)(2, 2)
+    \psSolid[object=cylindre, h=3, r=1, fillcolor=white, ngrid=4 22] (0, 0 -3)
+    % 3d axis
+    \axesIIID[labelsep=10pt](0, 0, 0)(3, 3, 3)
+\end{pspicture}
+
+% curve
+\begin{pspicture}[viewpoint=50 30 20 rtp2xyz] (-2, -2)(2, 2)
+    \defFunction[algebraic]{helice}(t){cos(t)}{sin(t)}{t}
+    \psSolid[object=courbe, function=helice, resolution=360]
+    % 3d axis
+    \axesIIID[labelsep=10pt](0, 0, 0)(3, 3, 3)
+\end{pspicture}
+
+
+\end{document}

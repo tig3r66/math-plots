@@ -1,0 +1,83 @@
+% !TEX program = xelatex
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{pst-3dplot}
+
+
+\begin{document}
+
+\section{Grids}
+
+% simple grid
+\begin{pspicture}(0, 0)(3, 3)
+    % grid
+    \psgrid(0, 0)(3, 3)
+\end{pspicture}
+\hfill
+% grid w/o minor grids
+\begin{pspicture}(0, 0)(3, 3)
+    % grid
+    \psgrid[subgriddiv=0](0, 0)(3, 3)
+\end{pspicture}
+\hfill
+% dotted major grid
+\begin{pspicture}(0, 0)(3, 3)
+    % grid w/o subdivisions
+    \psgrid[subgriddiv=0, griddots=10](0, 0)(3, 3)
+\end{pspicture}
+
+\section{Lines and Polygons}
+
+% lines
+\begin{pspicture}(0, 0)(4, 2)
+    \psgrid[subgriddiv=0, griddots=10](0, 0)(4, 2)
+    % bent line
+    \psline[linewidth=2pt, linearc=0.25]{->}(4, 2)(0, 1)(2, 0)
+    % straight line ONLY (no optional parameters)
+    \qline(0, 0)(4, 1)
+\end{pspicture}
+\hfill
+% pspolygon (draws a closed path)
+\begin{pspicture}(0, 0)(4, 2)
+    \psgrid[subgriddiv=0, griddots=10](0, 0)(4, 2)
+    % triangle
+    \pspolygon[linewidth=1.5pt](0, 2)(1, 2)
+    % filled polygon
+    \pspolygon*[linearc=.2, linecolor=lightgray](1, 0)(1, 2)(4, 0)(4, 2)
+\end{pspicture}
+\hfill
+% rectangle
+\begin{pspicture}(0, 0)(4, 2)
+    \psgrid[subgriddiv=0, griddots=10](0, 0)(4, 2)
+    % outer rectangle
+    \psframe[linewidth=2pt, framearc=.3, fillstyle=solid, fillcolor=blue!25](4, 2)
+    % inner rectangle
+    \psframe*[linecolor=white](1, 0.5)(2, 1.5)
+\end{pspicture}
+
+\vspace{3em}
+
+% diamond
+\begin{pspicture}(0, 0)(4, 2)
+    \psgrid[subgriddiv=0, griddots=10](0, 0)(4, 2)
+    \psdiamond[framearc=.3, fillstyle=solid, fillcolor=lightgray](2, 1)(1.5, 1)
+\end{pspicture}
+\hfill
+% rotated diamond
+\begin{pspicture}(0, 0)(4, 2)
+    \psgrid[subgriddiv=0, griddots=10](0, 0)(4, 2)
+    \psdiamond[framearc=.3, fillstyle=solid, fillcolor=lightgray, gangle=33](2, 1)(1.5, 1)
+\end{pspicture}
+\hfill
+% triangle
+\begin{pspicture}(0, 0)(4, 2)
+    \psgrid[subgriddiv=0, griddots=10](0, 0)(4, 2)
+    \pstriangle*[gangle=10](2, 0.5)(4, 1)
+\end{pspicture}
+
+\section{Arcs, Circles, Ellipses}
+
+
+
+
+\end{document}
