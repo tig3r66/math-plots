@@ -1,0 +1,33 @@
+% !TEX program = xelatex
+\documentclass{standalone}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{tikz}
+
+
+\begin{document}
+
+% hyperboloid of one sheet
+
+\begin{tikzpicture}
+    \begin{axis}[
+        axis on top,
+        axis lines=center,
+        set layers=default,
+        xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+        xtick=\empty, ytick=\empty, ztick=\empty,
+        domain=0:1, y domain=0:2*pi,
+        colormap/viridis,
+        opacity=0.75,
+        xmin=-2, xmax=2, ymin=-2, ymax=2,
+        view={135}{30}
+    ]
+
+    \addplot3 [surf,domain=0:360,y domain=-1:1]
+              ({cosh(y)*cos(x)}, {cosh(y)*sin(x)}, {sinh(y)});
+    \end{axis}
+\end{tikzpicture}
+
+
+\end{document}
